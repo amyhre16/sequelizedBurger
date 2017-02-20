@@ -12,11 +12,14 @@ var app = express();
 // if the app is on heroku, use heroku's port; if local, use port 8080
 var PORT = process.env.PORT || 8080;
 
+// require models for syncing
+var db = require('./models');
+
 // serve static content for the app from the "public/assets" directory
 app.use(express.static(__dirname + "/public/assets"));
 
 // set up Express app to handle data parsing
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
@@ -31,7 +34,10 @@ app.set('view engine', 'handlebars');
 // pass app to the burgers_controller.js so that the file has access to the sever
 var routes = require('./controllers/burgers_controller')(app);
 
-// run the server
-app.listen(PORT, function() {
-	console.log("App is listening on PORT " + PORT);
+// syncing our sequelize models
+de.sequelize.sync({}).then(function() {
+	// run the server
+	app.listen(PORT, function() {
+		console.log("App is listening on PORT " + PORT);
+	});
 });
