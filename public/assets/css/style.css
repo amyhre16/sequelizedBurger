@@ -1,0 +1,25 @@
+/* style specific to main.handlebars */
+
+body {
+	background-color: #f4e01f;
+}
+
+h1 {
+	color: #e92632;
+}
+
+img {
+	margin: auto;
+	width: 130px;
+	display: block;
+}
+
+textarea {
+	width: 100%;
+}
+
+/* style for main.handlebars and index.handlebars */
+
+h1, .col-lg-4, h3, form, footer {
+	text-align: center;
+}
