@@ -9,8 +9,8 @@ module.exports = function(sequelize, DataTypes) {
 		devoured: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false
-		},
-		dateTimeUpdated: DataTypes.NOW
+		}
+		// dateTimeUpdated: DataTypes.NOW
 	});
 
 	return Burger;
