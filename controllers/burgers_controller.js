@@ -8,11 +8,8 @@ var burger = require('./../models');
 // all routes listen to / route
 module.exports = function(app) {
 	app.get('/', function(req, res) {
-		// run the selectAll method from burger.js and pass in res and renderPage as parameters
-		// burger.selectAll(res, renderPage);
 		burger.Burger.findAll({}).then(function(dbBurger) {
 			console.log('rendering / route');
-			// console.log(dbBurger[0].dataValues);
 			var burgers = [];
 			for (var i = 0; i < dbBurger.length; i++) {
 				burgers.push(dbBurger[i].dataValues);
@@ -23,8 +20,6 @@ module.exports = function(app) {
 	});
 
 	app.post('/', function(req, res) {
-		// run the insertOne method from burger.js and pass in the burger_name from the POST request, res and redirectPage as parameters
-		// burger.insertOne(req.body.burger_name, res, redirectPage);
 		burger.Burger.create({
 			burger_name: req.body.burger_name
 		}).then(function(dbBurger) {
@@ -33,8 +28,6 @@ module.exports = function(app) {
 	});
 
 	app.put('/', function(req, res) {
-		// run updateOne method from burger.js and pass in id from PUT request, res and redirectPage as parameters
-		// burger.updateOne(req.body.id, 1, res, redirectPage);
 		burger.Burger.update({
 			devoured: true
 		}, {
@@ -46,20 +39,3 @@ module.exports = function(app) {
 		});
 	});
 };
-
-/*
-	callback function for selectAll. takes result from query and res from ajax request as parameters
-*/
-function renderPage(result, res) {
-	// render index.handlebars and pass in object w/ the query result as a property
-	res.render('index', {burgers: result});
-}
-
-/*
-	callback function for insertOne and updateOne
-	takes res from ajax request as parameter
-*/
-function redirectPage(res) {
-	// redirects page to home route without the user having to refresh page
-	res.redirect('/');
-}
